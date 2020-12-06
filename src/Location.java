@@ -2,10 +2,11 @@ import java.util.Objects;
 
 public class Location implements LocationActions {
     private boolean isGravityEnabled;
-    private TypeOfLocation place;
+    private final TypeOfLocation place;
 
     Location(boolean isGravityEnabled, TypeOfLocation place){
-        this.isGravityEnabled = isGravityEnabled; this.place = place;
+        this.isGravityEnabled = isGravityEnabled;
+        this.place = place;
     }
 
     public void setGravityEnabled(boolean gravityEnabled) {

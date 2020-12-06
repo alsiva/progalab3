@@ -1,12 +1,12 @@
 abstract class RocksAbstract {
-    private int amount;
+    protected int amount;
 
-    RocksAbstract(int n) {
-        this.amount = n;
+    RocksAbstract(int amount) {
+        this.amount = amount;
     }
 
-    public void setRocks(int n){
-        this.amount = n;
+    public void setRocks(int amount){
+        this.amount = amount;
     }
 
     public int getRocks(){

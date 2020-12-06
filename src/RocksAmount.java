@@ -1,11 +1,8 @@
 import java.util.Objects;
 
 public class RocksAmount extends RocksAbstract {
-
-    private int amount;
-
-    RocksAmount(int n) {
-        super(n);
+    RocksAmount(int amount) {
+        super(amount);
     }
 
     @Override

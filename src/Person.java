@@ -1,9 +1,9 @@
 import java.util.Objects;
 
 public class Person implements Actions {
-    private String name;
-    private RocksAmount rocks;
-    private Location location;
+    private final String name;
+    private final RocksAmount rocks;
+    private final Location location;
 
     Person(String name, RocksAmount rocks, Location location){
         this.name = name;
