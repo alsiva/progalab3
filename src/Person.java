@@ -17,7 +17,6 @@ public class Person implements Actions {
                 + "name='" + name + '\'' +
                 ", rocks=" + rocks.getRocks() +
                 '}';
-
     }
 
     @Override
@@ -48,6 +47,7 @@ public class Person implements Actions {
     }
 
     public void disableGravity() {
+        System.out.println(this.name + " отключает гравитацию");
         location.setGravityEnabled(false);
     }
 
