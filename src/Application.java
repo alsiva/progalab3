@@ -1,21 +1,23 @@
 public class Application {
     public static void main(String[] args) {
-        Location cave = new Location(true, TypeOfLocation.cave);
+        GravityDevice gravityDevice = new GravityDevice();
+        Location cave = new Location(true);
 
-        Person znayka = new Person("Знайка", new RocksAmount(10), cave);
-        Person scout = new Person("Scout", new RocksAmount(10), cave);
-        Person heavy = new Person("Heavy", new RocksAmount(10), cave);
+        Person znayka = new Person("Знайка", cave);
+        Person scout = new Person("Scout", cave);
+        Person heavy = new Person("Heavy", cave);
 
-        znayka.giveRock(5, scout);
-        znayka.giveRock(5, heavy);
+        while (!znayka.hasEnoughAntilunite(10)) {
+            znayka.mineRock(cave);
+        }
 
-        znayka.disableGravity();
+        znayka.say("");
+
+        znayka.giveRock(5, scout, RockMaterial.ANTILUNITE);
+        znayka.giveRock(5, heavy, RockMaterial.ANTILUNITE);
+
+        znayka.toggleState(gravityDevice);
 
         znayka.getState();
-
-        //Person znaykaClone = new Person("Знайка", new RocksAmount(0), cave);
-
-        //System.out.println(znayka.equals(znaykaClone));
-        //System.out.println(znayka);
     }
 }

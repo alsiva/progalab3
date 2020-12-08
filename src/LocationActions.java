@@ -1,4 +1,6 @@
 interface LocationActions {
     void setGravityEnabled(boolean gravityEnabled);
-    boolean getGravity();
+    boolean getIsGravityEnabled();
+
+    RockMaterial mineRandomRock();
 }
