@@ -1,23 +1,28 @@
 public class Application {
     public static void main(String[] args) {
-        GravityDevice gravityDevice = new GravityDevice();
+        ZeroGravityDevice gravityDevice = new ZeroGravityDevice();
         Location cave = new Location(true);
 
         Person znayka = new Person("Знайка", cave);
         Person scout = new Person("Scout", cave);
         Person heavy = new Person("Heavy", cave);
 
+        Pickaxe pickaxe = new Pickaxe();
+
         while (!znayka.hasEnoughAntilunite(10)) {
-            znayka.mineRock(cave);
+            znayka.use(pickaxe);
         }
 
-        znayka.say("");
+        znayka.say("Нам стоило большого труда отколоть эти камешки от огромнейшей глыбы, найденной в глубине пещеры.");
 
         znayka.giveRock(5, scout, RockMaterial.ANTILUNITE);
         znayka.giveRock(5, heavy, RockMaterial.ANTILUNITE);
 
-        znayka.toggleState(gravityDevice);
+        znayka.turnOn(gravityDevice);
+        znayka.use(gravityDevice.getGravityToggle());
 
-        znayka.getState();
+        scout.getGravityState();
+        heavy.getGravityState();
+        znayka.getGravityState();
     }
 }

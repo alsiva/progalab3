@@ -3,8 +3,8 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Set;
 
-public class Location extends RockOwnerAbst implements LocationActions {
-    private boolean isGravityEnabled;
+public class Location extends RockOwnerAbst {
+    private boolean hasGravity;
 
     Location(boolean isGravityEnabled) {
         super(new HashMap<RockMaterial, Integer>() {{
@@ -13,18 +13,17 @@ public class Location extends RockOwnerAbst implements LocationActions {
             put(RockMaterial.DIAMOND, 20);
         }});
 
-        this.isGravityEnabled = isGravityEnabled;
+        this.hasGravity = isGravityEnabled;
     }
 
-    public void setGravityEnabled(boolean gravityEnabled) {
-        isGravityEnabled = gravityEnabled;
+    public void setHasGravity(boolean hasGravity) {
+        this.hasGravity = hasGravity;
     }
 
-    public boolean getIsGravityEnabled(){
-        return isGravityEnabled;
+    public boolean hasGravity() {
+        return hasGravity;
     }
 
-    @Override
     public RockMaterial mineRandomRock() {
         Set<RockMaterial> materialsWeHave = materialToAmount.keySet();
         RockMaterial randomMaterial = new ArrayList<>(materialsWeHave).get(new Random().nextInt(materialsWeHave.size()));
