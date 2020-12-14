@@ -22,8 +22,7 @@ public class ZeroGravityDevice implements Toggleable {
         @Override
         public void use(Location location, Person person) {
             if (!isTurnedOn) {
-                System.out.println("Прибор гравитации выключен");
-                return;
+                throw new TurnedOffException(ZeroGravityDevice.this);
             }
             isGravityEnabled = !isGravityEnabled;
 

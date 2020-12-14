@@ -24,10 +24,14 @@ public class Location extends RockOwnerAbst {
         return hasGravity;
     }
 
-    public RockMaterial mineRandomRock() {
+    public RockMaterial mineRandomRock() throws NoMoreRocksException {
         Set<RockMaterial> materialsWeHave = materialToAmount.keySet();
-        RockMaterial randomMaterial = new ArrayList<>(materialsWeHave).get(new Random().nextInt(materialsWeHave.size()));
 
+        if (materialsWeHave.size() == 0) {
+            throw new NoMoreRocksException();
+        }
+
+        RockMaterial randomMaterial = new ArrayList<>(materialsWeHave).get(new Random().nextInt(materialsWeHave.size()));
         removeRocks(1, randomMaterial);
         return randomMaterial;
     }
