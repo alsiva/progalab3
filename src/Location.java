@@ -1,18 +1,11 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
-import java.util.Set;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class Location extends RockOwnerAbst {
     private boolean hasGravity;
 
     Location(boolean isGravityEnabled) {
-        super(new HashMap<RockMaterial, Integer>() {{
-                put(RockMaterial.ANTILUNITE, 50);
-                put(RockMaterial.IRON, 70);
-                put(RockMaterial.DIAMOND, 20);
-            }
-        });
+        super(generateRandomRocks());
 
         this.hasGravity = isGravityEnabled;
     }
@@ -25,16 +18,21 @@ public class Location extends RockOwnerAbst {
         return hasGravity;
     }
 
-    public RockMaterial mineRandomRock() throws NoMoreRocksException {
-        Set<RockMaterial> materialsWeHave = materialToAmount.keySet();
 
-        if (materialsWeHave.size() == 0) {
-            throw new NoMoreRocksException();
+    static private List<Rock> generateRandomRocks() {
+        Random random = new Random();
+        RockMaterial[] materialsArray = RockMaterial.values();
+
+        List<Rock> rocks = new ArrayList<>();
+        for (int i = 0; i < 50; i++) {
+            RockMaterial randomMaterial = materialsArray[random.nextInt(materialsArray.length)];
+            double randomVolume = random.nextDouble() * 10;
+            double randomDensity = random.nextDouble() * 5;
+            Rock.Size randomSize = new Rock.Size(randomVolume, randomDensity);
+            Rock randomRock = new Rock(randomMaterial, randomSize);
+            rocks.add(randomRock);
         }
 
-        RockMaterial randomMaterial = new ArrayList<>(materialsWeHave).get(new Random().nextInt(materialsWeHave.size()));
-        removeRocks(1, randomMaterial);
-        return randomMaterial;
+        return rocks;
     }
-
 }

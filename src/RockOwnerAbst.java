@@ -1,30 +1,25 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public abstract class RockOwnerAbst {
-    protected final Map<RockMaterial, Integer> materialToAmount;
+    protected List<Rock> rocks;
 
-    public RockOwnerAbst(Map<RockMaterial, Integer> materialToAmount) {
-        this.materialToAmount = materialToAmount;
+    public RockOwnerAbst(List<Rock> rocks) {
+        this.rocks = rocks;
     }
 
     public RockOwnerAbst() {
-        this.materialToAmount = new HashMap<>();
+        this.rocks = new ArrayList<>();
     }
 
-    protected void addRocks(int amount, RockMaterial material) {
-        Integer storageAmount = materialToAmount.getOrDefault(material, 0);
-        materialToAmount.put(material, storageAmount + amount);
+    protected void addRocks(List<Rock> rocks) {
+        this.rocks.addAll(rocks);
     }
 
-    protected int removeRocks(int amount, RockMaterial material) {
-        Integer storageAmount = materialToAmount.get(material);
-        if (storageAmount > amount) {
-            materialToAmount.put(material, storageAmount - amount);
-            return amount;
-        } else {
-            materialToAmount.remove(material);
-            return storageAmount;
-        }
+    protected List<Rock> removeRock(int amount, RockMaterial material) {
+        List<Rock> rocks = Collections.emptyList(); // todo: get rock of material
+
+        return rocks;
     }
 }

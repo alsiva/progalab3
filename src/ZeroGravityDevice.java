@@ -3,7 +3,7 @@ public class ZeroGravityDevice implements Toggleable {
     private final GravityToggle gravityToggle = new GravityToggle();
 
     ZeroGravityDevice(Rock rock) {
-        //todo: throw exception wrong rock type
+        // todo: throw exception wrong rock type
     }
 
     @Override

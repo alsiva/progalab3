@@ -8,8 +8,13 @@ public class Rock {
     }
 
     public static class Size {
-        double volume;
-        double density;
+        final double volume;
+        final double density;
+
+        public Size(double volume, double density) {
+            this.volume = volume;
+            this.density = density;
+        }
 
         public double getSize() {
             return volume * density;
