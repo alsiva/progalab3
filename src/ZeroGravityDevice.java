@@ -2,6 +2,10 @@ public class ZeroGravityDevice implements Toggleable {
     private boolean isTurnedOn = false;
     private final GravityToggle gravityToggle = new GravityToggle();
 
+    ZeroGravityDevice(Rock rock) {
+        //todo: throw exception wrong rock type
+    }
+
     @Override
     public boolean getIsTurnedOn() {
         return isTurnedOn;

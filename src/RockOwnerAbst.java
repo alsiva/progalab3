@@ -14,7 +14,7 @@ public abstract class RockOwnerAbst {
 
     protected void addRocks(int amount, RockMaterial material) {
         Integer storageAmount = materialToAmount.getOrDefault(material, 0);
-        materialToAmount.put(material,storageAmount + amount);
+        materialToAmount.put(material, storageAmount + amount);
     }
 
     protected int removeRocks(int amount, RockMaterial material) {

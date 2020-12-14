@@ -1,5 +1,6 @@
 public enum RockMaterial {
     IRON,
     DIAMOND,
-    ANTILUNITE
+    LUNITE,
+    ANTILUNITE,
 }

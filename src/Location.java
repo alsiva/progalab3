@@ -8,10 +8,11 @@ public class Location extends RockOwnerAbst {
 
     Location(boolean isGravityEnabled) {
         super(new HashMap<RockMaterial, Integer>() {{
-            put(RockMaterial.ANTILUNITE, 50);
-            put(RockMaterial.IRON, 70);
-            put(RockMaterial.DIAMOND, 20);
-        }});
+                put(RockMaterial.ANTILUNITE, 50);
+                put(RockMaterial.IRON, 70);
+                put(RockMaterial.DIAMOND, 20);
+            }
+        });
 
         this.hasGravity = isGravityEnabled;
     }
