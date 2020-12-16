@@ -1,12 +1,12 @@
 import java.util.*;
 
 public class Location extends RockOwnerAbst {
-    private boolean hasGravity;
+    private boolean hasGravity = true;
+    private final String name;
 
-    Location(boolean isGravityEnabled) {
+    Location(String name) {
         super(generateRandomRocks());
-
-        this.hasGravity = isGravityEnabled;
+        this.name = name;
     }
 
     public void setHasGravity(boolean hasGravity) {
@@ -33,5 +33,10 @@ public class Location extends RockOwnerAbst {
         }
 
         return rocks;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

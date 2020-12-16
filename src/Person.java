@@ -21,17 +21,17 @@ abstract public class Person extends RockOwnerAbst {
         dude.addRocks(rocks);
 
         if (amount != rocks.size()) {
-            System.out.println(this.name + " не смог дать " + dude.name + " " + amount + " камней типа " + material + ", дал " + rocks.size() + " камней.");
+            System.out.println(this + " не смог дать " + dude + " " + amount + " камней типа " + material + ", дал " + rocks.size() + " камней.");
         } else {
-            System.out.println(this.name + " дал " + dude.name + " " + amount + " камней типа " + material + ".");
+            System.out.println(this + " дал " + dude + " " + amount + " камней типа " + material + ".");
         }
     }
 
     public void printGravityState(Location location) {
         if (location.hasGravity() || this.hasAntilunite()) {
-            System.out.println(this.name + " на земле");
+            System.out.println(this + " на земле");
         } else {
-            System.out.println(this.name + " в воздухе");
+            System.out.println(this + " в воздухе");
         }
     }
 
@@ -39,9 +39,6 @@ abstract public class Person extends RockOwnerAbst {
         System.out.println(what);
     }
 
-    public String getName() {
-        return this.name;
-    }
 
     public boolean hasAntilunite() {
         for (Rock rock: this.rocks) {
@@ -70,8 +67,18 @@ abstract public class Person extends RockOwnerAbst {
     class BareHands implements Tool {
         @Override
         public List<Rock> mineRocks(Location location, int howMuch) {
-            System.out.println(getName() + " добыл из " + location + " " + howMuch + " камней вида " + RockMaterial.LUNITE);
+            System.out.println(Person.this + " добыл из " + location + " " + howMuch + " камней вида " + RockMaterial.LUNITE);
             return location.removeRock(1, RockMaterial.LUNITE);
         }
+
+        @Override
+        public String toString() {
+            return "Голые руки у " + Person.this;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

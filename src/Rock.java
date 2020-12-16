@@ -7,6 +7,11 @@ public class Rock {
         this.size = size;
     }
 
+    @Override
+    public String toString() {
+        return "Камень с материалом " + material + " и размером " + size + ".";
+    }
+
     public static class Size {
         final double volume;
         final double density;

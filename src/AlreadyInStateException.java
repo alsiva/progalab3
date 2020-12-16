@@ -7,6 +7,6 @@ public class AlreadyInStateException extends Exception {
 
     @Override
     public String getMessage() {
-        return "Прибор уже был " + (toggleable.getIsTurnedOn() ? "включен" : "выключен");
+        return toggleable + " уже был " + (toggleable.getIsTurnedOn() ? "включен" : "выключен");
     }
 }

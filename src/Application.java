@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class Application {
     public static void main(String[] args) {
-        Location cave = new Location(true);
+        Location cave = new Location("пещера");
 
         Person znayka = new Person("Знайка") {
             private final Pickaxe pickaxe = new Pickaxe();

@@ -18,11 +18,16 @@ public class ZeroGravityDevice implements Toggleable {
     @Override
     public void toggle(Person person) {
         if (getIsTurnedOn()) {
-            System.out.println(person.getName() + " выключает прибор невесомости");
+            System.out.println(person + " выключает прибор невесомости");
             this.location.setHasGravity(true);
         } else {
-            System.out.println(person.getName() + " включает переключатель невесомости");
+            System.out.println(person + " включает переключатель невесомости");
             this.location.setHasGravity(false);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Прибор невесомости";
     }
 }

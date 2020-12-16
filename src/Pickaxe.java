@@ -5,4 +5,9 @@ public class Pickaxe implements Tool {
     public List<Rock> mineRocks(Location location, int howMuch) {
         return location.removeRock(howMuch, RockMaterial.ANTILUNITE);
     }
+
+    @Override
+    public String toString() {
+        return "Кирка";
+    }
 }
