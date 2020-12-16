@@ -1,9 +1,13 @@
 public class ZeroGravityDevice implements Toggleable {
-    private boolean isTurnedOn = false;
+    private boolean isTurnedOn = true;
     private final GravityToggle gravityToggle = new GravityToggle();
 
-    ZeroGravityDevice(Rock rock) {
-        // todo: throw exception wrong rock type
+    ZeroGravityDevice(Rock rock, Location location) throws NoRockOfMaterialException {
+        if (rock == null || rock.material != RockMaterial.LUNITE) {
+            throw new NoRockOfMaterialException(RockMaterial.LUNITE);
+        }
+
+        location.setHasGravity(false);
     }
 
     @Override
@@ -21,22 +25,16 @@ public class ZeroGravityDevice implements Toggleable {
     }
 
     class GravityToggle implements Tool {
-        Boolean isGravityEnabled = true;
-
         @Override
         public void use(Location location, Person person) {
-            if (!isTurnedOn) {
-                throw new TurnedOffException(ZeroGravityDevice.this);
-            }
-            isGravityEnabled = !isGravityEnabled;
-
-            if (isGravityEnabled) {
-                System.out.println(person.getName() + " включает переключатель невесомости");
+            if (isTurnedOn) {
+                System.out.println(person.getName() + " выключает прибор невесомости");
                 location.setHasGravity(true);
             } else {
-                System.out.println(person.getName() + " выключает прибор невесомости");
+                System.out.println(person.getName() + " включает переключатель невесомости");
                 location.setHasGravity(false);
             }
+            toggle();
         }
     }
 }

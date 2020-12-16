@@ -19,17 +19,17 @@ public class Person extends RockOwnerAbst {
         dude.addRocks(rocks);
 
         if (amount != rocks.size()) {
-            System.out.println(this.name + " не смог дать " + amount + ", дал " + rocks.size());
+            System.out.println(this.name + " не смог дать " + dude.name + " " + amount + " камней типа " + material + ", дал " + rocks.size() + " камней.");
         } else {
-            System.out.println(this.name + " дал " + amount);
+            System.out.println(this.name + " дал " + dude.name + " " + amount + " камней типа " + material + ".");
         }
     }
 
-    public void getGravityState() {
-        if (location.hasGravity() || hasEnoughAntilunite(1)) {
-            System.out.println(this.name + " находится на земле");
+    public void printGravityState() {
+        if (location.hasGravity() || hasAntilunite()) {
+            System.out.println(this.name + " на земле");
         } else {
-            System.out.println(this.name + " находится в воздухе");
+            System.out.println(this.name + " в воздухе");
         }
     }
 
@@ -41,17 +41,13 @@ public class Person extends RockOwnerAbst {
         return this.name;
     }
 
-    public boolean hasEnoughAntilunite(int enough) {
-        return false; // todo
-    }
-
-    public void turnOn(Toggleable toggleable) {
-        if (toggleable.getIsTurnedOn()) {
-            System.out.println("Прибор уже включён");
-        } else {
-            toggleable.toggle();
-            System.out.println(this.name + " включил прибор");
+    public boolean hasAntilunite() {
+        for (Rock rock: this.rocks) {
+            if (rock.material == RockMaterial.ANTILUNITE) {
+                return true;
+            }
         }
+        return false;
     }
 
     public void use(Tool tool) {

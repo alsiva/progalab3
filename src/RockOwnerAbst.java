@@ -1,11 +1,11 @@
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public abstract class RockOwnerAbst {
-    protected List<Rock> rocks;
+    protected ArrayList<Rock> rocks;
 
-    public RockOwnerAbst(List<Rock> rocks) {
+    public RockOwnerAbst(ArrayList<Rock> rocks) {
         this.rocks = rocks;
     }
 
@@ -18,8 +18,19 @@ public abstract class RockOwnerAbst {
     }
 
     protected List<Rock> removeRock(int amount, RockMaterial material) {
-        List<Rock> rocks = Collections.emptyList(); // todo: get rock of material
+        List<Rock> rocksRemoved = new ArrayList<>();
 
-        return rocks;
+        Iterator<Rock> iterator = rocks.iterator();
+
+        while (iterator.hasNext() && amount > 0) {
+            Rock rock = iterator.next();
+            if (rock.material == material) {
+                rocksRemoved.add(rock);
+                iterator.remove();
+                amount--;
+            }
+        }
+
+        return rocksRemoved;
     }
 }

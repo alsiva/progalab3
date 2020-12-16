@@ -31,15 +31,22 @@ public class Application {
 
                 for (Person person : Arrays.asList(znayka, fuchsia, herring)) {
                     for (Rock rock : person.rocks) {
-                        // todo: compare this rock with the biggest one (also check type)
+                        if (rock.material != RockMaterial.LUNITE) {
+                            continue;
+                        }
+                        if (biggestLuniteRock == null || rock.size.getSize() > biggestLuniteRock.size.getSize()) {
+                            biggestLuniteRock = rock;
+                        }
                     }
                 }
 
-                if (biggestLuniteRock == null) {
-                    throw new NoRockOfMaterialException(RockMaterial.LUNITE);
-                }
+                return new ZeroGravityDevice(biggestLuniteRock, cave);
+            }
 
-                return new ZeroGravityDevice(biggestLuniteRock);
+            public void printTeamState() {
+                fuchsia.printGravityState();
+                herring.printGravityState();
+                znayka.printGravityState();
             }
         }
 
@@ -48,21 +55,23 @@ public class Application {
         ZeroGravityDevice gravityDevice = null;
         try {
             gravityDevice = team.craft();
+            System.out.println("Коротышки сконструировали прибор невесомости");
         } catch (NoRockOfMaterialException e) {
-            System.err.println("Коротышки не смогли сделать прибор невесомости");
+            System.err.println("Коротышки не смогли сконструировать прибор невесомости");
             System.exit(1);
         }
 
+        team.printTeamState();
+        znayka.use(gravityDevice.getGravityToggle());
+        team.printTeamState();
+
         znayka.say("Нам стоило большого труда отколоть эти камешки от огромнейшей глыбы, найденной в глубине пещеры.");
+        znayka.giveRock(2, fuchsia, RockMaterial.ANTILUNITE);
+        znayka.giveRock(2, herring, RockMaterial.ANTILUNITE);
 
-        znayka.giveRock(5, fuchsia, RockMaterial.ANTILUNITE);
-        znayka.giveRock(5, herring, RockMaterial.ANTILUNITE);
-
-        znayka.turnOn(gravityDevice);
         znayka.use(gravityDevice.getGravityToggle());
 
-        fuchsia.getGravityState();
-        herring.getGravityState();
-        znayka.getGravityState();
+        team.printTeamState();
+
     }
 }

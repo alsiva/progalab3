@@ -19,11 +19,11 @@ public class Location extends RockOwnerAbst {
     }
 
 
-    static private List<Rock> generateRandomRocks() {
+    static private ArrayList<Rock> generateRandomRocks() {
         Random random = new Random();
         RockMaterial[] materialsArray = RockMaterial.values();
 
-        List<Rock> rocks = new ArrayList<>();
+        ArrayList<Rock> rocks = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
             RockMaterial randomMaterial = materialsArray[random.nextInt(materialsArray.length)];
             double randomVolume = random.nextDouble() * 10;
