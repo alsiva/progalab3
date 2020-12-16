@@ -1,6 +1,8 @@
+import java.util.List;
+
 public class Pickaxe implements Tool {
     @Override
-    public void use(Location location, Person person) {
-        person.addRocks(location.removeRock(1, RockMaterial.ANTILUNITE));
+    public List<Rock> mineRocks(Location location, int howMuch) {
+        return location.removeRock(howMuch, RockMaterial.ANTILUNITE);
     }
 }

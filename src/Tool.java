@@ -1,3 +1,5 @@
+import java.util.List;
+
 public interface Tool {
-    void use(Location location, Person person);
+    List<Rock> mineRocks(Location location, int howMuch);
 }

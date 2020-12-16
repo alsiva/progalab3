@@ -4,26 +4,21 @@ public class Application {
     public static void main(String[] args) {
         Location cave = new Location(true);
 
-        Pickaxe pickaxe = new Pickaxe();
+        Person znayka = new Person("Знайка") {
+            private final Pickaxe pickaxe = new Pickaxe();
 
-        Person znayka = new Person("Знайка", cave) {
             @Override
-            public void mineRock(int amount) {
-                for (int i = 0; i < amount; i++) {
-                    use(pickaxe);
-                }
+            public Tool getRockMiningTool() {
+                return pickaxe;
             }
         };
 
-        Person fuchsia = new Person("Функсия", cave);
-        Person herring = new Person("Селёдочка", cave);
+        Person fuchsia = new PersonWithBareHands("Функсия");
+        Person herring = new PersonWithBareHands("Селёдочка");
 
-        // loop here
-
-        znayka.mineRock(4);
-        fuchsia.mineRock(10);
-        herring.mineRock(10);
-
+        znayka.obtainRocks(cave, 4);
+        fuchsia.obtainRocks(cave, 10);
+        herring.obtainRocks(cave, 10);
 
         class Team {
             public ZeroGravityDevice craft() throws NoRockOfMaterialException {
@@ -44,9 +39,9 @@ public class Application {
             }
 
             public void printTeamState() {
-                fuchsia.printGravityState();
-                herring.printGravityState();
-                znayka.printGravityState();
+                fuchsia.printGravityState(cave);
+                herring.printGravityState(cave);
+                znayka.printGravityState(cave);
             }
         }
 
@@ -57,21 +52,29 @@ public class Application {
             gravityDevice = team.craft();
             System.out.println("Коротышки сконструировали прибор невесомости");
         } catch (NoRockOfMaterialException e) {
-            System.err.println("Коротышки не смогли сконструировать прибор невесомости");
+            System.out.println("Коротышки не смогли сконструировать прибор невесомости");
             System.exit(1);
         }
 
         team.printTeamState();
-        znayka.use(gravityDevice.getGravityToggle());
+        try {
+            znayka.turnOff(gravityDevice);
+        } catch (AlreadyInStateException e) {
+            System.out.println("Прибор уже выключен");
+        }
+
         team.printTeamState();
 
         znayka.say("Нам стоило большого труда отколоть эти камешки от огромнейшей глыбы, найденной в глубине пещеры.");
         znayka.giveRock(2, fuchsia, RockMaterial.ANTILUNITE);
         znayka.giveRock(2, herring, RockMaterial.ANTILUNITE);
 
-        znayka.use(gravityDevice.getGravityToggle());
+        try {
+            znayka.turnOn(gravityDevice);
+        } catch (AlreadyInStateException e) {
+            System.err.println("Прибор уже включен");
+        }
 
         team.printTeamState();
-
     }
 }

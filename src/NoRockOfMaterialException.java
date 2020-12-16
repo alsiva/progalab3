@@ -1,4 +1,4 @@
-public class NoRockOfMaterialException extends Exception {
+public class NoRockOfMaterialException extends RuntimeException {
     private final RockMaterial material;
 
     public NoRockOfMaterialException(RockMaterial material) {
@@ -7,6 +7,6 @@ public class NoRockOfMaterialException extends Exception {
 
     @Override
     public String getMessage() {
-        return "больше нет камней с материалом " + material;
+        return "Больше нет камней с материалом " + material;
     }
 }

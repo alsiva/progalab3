@@ -1,4 +1,4 @@
 public interface Toggleable {
     boolean getIsTurnedOn();
-    void toggle();
+    void toggle(Person person);
 }

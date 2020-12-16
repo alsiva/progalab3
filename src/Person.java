@@ -1,17 +1,19 @@
 import java.util.List;
 
-public class Person extends RockOwnerAbst {
+abstract public class Person extends RockOwnerAbst {
     private final String name;
-    private final Location location;
 
-    Person(String name, Location location) {
+    Person(String name) {
         this.name = name;
-        this.location = location;
     }
 
-    public void mineRock(int amount) {
-        List<Rock> minedRocks = location.removeRock(amount, RockMaterial.LUNITE);
-        addRocks(minedRocks);
+    abstract public Tool getRockMiningTool();
+
+    public void obtainRocks(Location location, int amount) {
+        Tool tool = getRockMiningTool();
+        List<Rock> rocks = tool.mineRocks(location, amount);
+
+        addRocks(rocks);
     }
 
     public void giveRock(int amount, Person dude, RockMaterial material) {
@@ -25,8 +27,8 @@ public class Person extends RockOwnerAbst {
         }
     }
 
-    public void printGravityState() {
-        if (location.hasGravity() || hasAntilunite()) {
+    public void printGravityState(Location location) {
+        if (location.hasGravity() || this.hasAntilunite()) {
             System.out.println(this.name + " на земле");
         } else {
             System.out.println(this.name + " в воздухе");
@@ -50,7 +52,26 @@ public class Person extends RockOwnerAbst {
         return false;
     }
 
-    public void use(Tool tool) {
-        tool.use(this.location, this);
+    public void turnOn(Toggleable toggleable) throws AlreadyInStateException {
+        if (toggleable.getIsTurnedOn()) {
+            throw new AlreadyInStateException(toggleable);
+        }
+
+        toggleable.toggle(this);
+    }
+    public void turnOff(Toggleable toggleable) throws AlreadyInStateException {
+        if (!toggleable.getIsTurnedOn()) {
+            throw new AlreadyInStateException(toggleable);
+        }
+
+        toggleable.toggle(this);
+    }
+
+    class BareHands implements Tool {
+        @Override
+        public List<Rock> mineRocks(Location location, int howMuch) {
+            System.out.println(getName() + " добыл из " + location + " " + howMuch + " камней вида " + RockMaterial.LUNITE);
+            return location.removeRock(1, RockMaterial.LUNITE);
+        }
     }
 }
