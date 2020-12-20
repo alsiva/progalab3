@@ -1,6 +1,4 @@
 public enum RockMaterial {
-    IRON("Железо"),
-    DIAMOND("Алмаз"),
     LUNITE("Лунит"),
     ANTILUNITE("Антилунит");
 
