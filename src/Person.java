@@ -12,7 +12,7 @@ abstract public class Person extends RockOwnerAbst {
     public void obtainRocks(Location location, int amount) {
         Tool tool = getRockMiningTool();
         List<Rock> rocks = tool.mineRocks(location, amount);
-
+        System.out.println(Person.this + " добыл из " + location + " " + amount + " камней " + " вида " + tool.getRockMaterial());
         addRocks(rocks);
     }
 
@@ -65,10 +65,14 @@ abstract public class Person extends RockOwnerAbst {
     }
 
     class BareHands implements Tool {
+
+        public RockMaterial getRockMaterial() {
+            return RockMaterial.LUNITE;
+        }
+
         @Override
         public List<Rock> mineRocks(Location location, int howMuch) {
-            System.out.println(Person.this + " добыл из " + location + " " + howMuch + " камней вида " + RockMaterial.LUNITE);
-            return location.removeRock(1, RockMaterial.LUNITE);
+            return location.removeRock(howMuch, RockMaterial.LUNITE);
         }
 
         @Override
