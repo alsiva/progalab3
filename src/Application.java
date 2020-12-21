@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Application {
     public static void main(String[] args) {
@@ -25,10 +27,11 @@ public class Application {
                 Rock biggestLuniteRock = null;
 
                 for (Person person : Arrays.asList(znayka, fuchsia, herring)) {
-                    for (Rock rock : person.rocks) {
-                        if (rock.material != RockMaterial.LUNITE) {
-                            continue;
-                        }
+                    List<Rock> onlyAntilunites = person.rocks.stream()
+                            .filter(Rock::isAntilunite)
+                            .collect(Collectors.toList());
+
+                    for (Rock rock : onlyAntilunites) {
                         if (biggestLuniteRock == null || rock.size.getSize() > biggestLuniteRock.size.getSize()) {
                             biggestLuniteRock = rock;
                         }

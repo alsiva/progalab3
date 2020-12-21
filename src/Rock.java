@@ -9,6 +9,10 @@ public class Rock {
         this.size = size;
     }
 
+    public Boolean isAntilunite() {
+        return this.material == RockMaterial.ANTILUNITE;
+    }
+
     @Override
     public String toString() {
         return "Камень с материалом " + material + " и размером " + size + ".";
