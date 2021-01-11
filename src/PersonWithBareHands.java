@@ -1,8 +1,8 @@
 public class PersonWithBareHands extends Person {
     private final Tool bareHands = new BareHands();
 
-    PersonWithBareHands(String name) {
-        super(name);
+    PersonWithBareHands(String name, double x, double y) {
+        super(name,  x,  y);
     }
 
     @Override

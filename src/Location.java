@@ -3,18 +3,24 @@ import java.util.*;
 public class Location extends RockOwnerAbst {
     private boolean hasGravity = true;
     private final String name;
+    private double radiusOfDisabledGravity;
 
     Location(String name) {
         super(generateRandomRocks());
         this.name = name;
     }
 
-    public void setHasGravity(boolean hasGravity) {
+    public void setHasGravity(boolean hasGravity, double radius) {
         this.hasGravity = hasGravity;
+        this.radiusOfDisabledGravity = radius;
     }
 
     public boolean hasGravity() {
         return hasGravity;
+    }
+
+    public double getRadiusOfDisabledGravity(){
+        return radiusOfDisabledGravity;
     }
 
 

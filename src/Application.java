@@ -6,7 +6,7 @@ public class Application {
     public static void main(String[] args) {
         Location cave = new Location("пещера");
 
-        Person znayka = new Person("Знайка") {
+        Person znayka = new Person("Знайка", 0, 0) {
             private final Pickaxe pickaxe = new Pickaxe();
 
             @Override
@@ -15,8 +15,8 @@ public class Application {
             }
         };
 
-        Person fuchsia = new PersonWithBareHands("Функсия");
-        Person herring = new PersonWithBareHands("Селёдочка");
+        Person fuchsia = new PersonWithBareHands("Функсия", 10, 10);
+        Person herring = new PersonWithBareHands("Селёдочка", 10, 10);
 
         znayka.obtainRocks(cave, 4);
         fuchsia.obtainRocks(cave, 10);
