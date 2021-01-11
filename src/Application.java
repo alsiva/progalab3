@@ -22,6 +22,9 @@ public class Application {
         fuchsia.obtainRocks(cave, 10);
         herring.obtainRocks(cave, 10);
 
+        znayka.giveRock(2, cave, RockMaterial.ANTILUNITE);
+
+
         class Team {
             public ZeroGravityDevice craft() throws NoRockOfMaterialException {
                 Rock biggestLuniteRock = null;
