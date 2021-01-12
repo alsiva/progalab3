@@ -27,7 +27,7 @@ abstract public class Person extends RockOwnerAbst {
         addRocks(rocks);
     }
 
-    public void giveRock(int amount, RockOwner dude, RockMaterial material) {
+    public void giveRock(int amount, Person dude, RockMaterial material) {
         List<Rock> rocks = removeRock(amount, material);
         dude.addRocks(rocks);
 
