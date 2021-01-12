@@ -1,7 +1,8 @@
 public class ZeroGravityDevice implements Toggleable {
     private final Location location;
-    private double[] position = new double[2];
-    private double radius;
+    private final Position position = new Position(0, 0);
+    private final double radius;
+    private static final double CAN_TOGGLE_RADIUS = 1;
 
     ZeroGravityDevice(Rock rock, Location location) {
         if (rock == null || rock.material != RockMaterial.LUNITE) {
@@ -9,8 +10,6 @@ public class ZeroGravityDevice implements Toggleable {
         }
 
         this.location = location;
-        this.position[0] = 0;
-        this.position[1] = 0;
         this.radius = 5;
         location.setHasGravity(false, radius);
     }
@@ -22,7 +21,7 @@ public class ZeroGravityDevice implements Toggleable {
 
     @Override
     public void toggle(Person person) {
-        if (Math.pow((person.getPosition()[0] - this.position[0]), 2) + Math.pow((person.getPosition()[1] - this.position[1]), 2) < 1) {
+        if (position.withinDistance(person.getPosition(), CAN_TOGGLE_RADIUS)) {
             if (getIsTurnedOn()) {
                 System.out.println(person + " выключает прибор невесомости");
                 this.location.setHasGravity(true, radius);
@@ -39,5 +38,9 @@ public class ZeroGravityDevice implements Toggleable {
     @Override
     public String toString() {
         return "Прибор невесомости";
+    }
+
+    public Position getPosition() {
+        return position;
     }
 }

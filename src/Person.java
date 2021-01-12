@@ -2,21 +2,19 @@ import java.util.List;
 
 abstract public class Person extends RockOwnerAbst {
     private final String name;
-    private double[] position = new double[2];
+    private Position position;
 
     Person(String name, double x, double y) {
         this.name = name;
-        this.position[0] = x;
-        this.position[1] = x;
+        this.position = new Position(x, y);
     }
 
-    public double[] getPosition(){
+    public Position getPosition(){
         return position;
     }
 
     public void move(double x, double y) {
-        this.position[0] = x;
-        this.position[1] = y;
+        this.position = new Position(x, y);
         System.out.print(Person.this + "переместился на координаты" + "x = " + x + " y = "+ y);
     }
 
@@ -25,7 +23,7 @@ abstract public class Person extends RockOwnerAbst {
     public void obtainRocks(Location location, int amount) {
         Tool tool = getRockMiningTool();
         List<Rock> rocks = tool.mineRocks(location, amount);
-        System.out.println(Person.this + " добыл из " + location + " " + amount + " камней " + " вида " + tool.getRockMaterial());
+        System.out.println(Person.this + " добыл из " + location + " " + amount + " камней вида " + tool.getRockMaterial());
         addRocks(rocks);
     }
 
@@ -40,8 +38,8 @@ abstract public class Person extends RockOwnerAbst {
         }
     }
 
-    public void printGravityState(Location location) {
-        if (location.hasGravity() || this.hasAntilunite() || ((Math.pow(this.position[0], 2) + (Math.pow(this.position[1], 2)) < Math.pow(location.getRadiusOfDisabledGravity(), 2)))) {
+    public void printGravityState(Location location, ZeroGravityDevice device) {
+        if (location.hasGravity() || this.hasAntilunite() || position.withinDistance(device.getPosition(), location.getRadiusOfDisabledGravity())) {
             System.out.println(this + " на земле");
         } else {
             System.out.println(this + " в воздухе");

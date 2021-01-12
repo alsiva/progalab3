@@ -44,10 +44,10 @@ public class Application {
                 return new ZeroGravityDevice(biggestLuniteRock, cave);
             }
 
-            public void printTeamState() {
-                fuchsia.printGravityState(cave);
-                herring.printGravityState(cave);
-                znayka.printGravityState(cave);
+            public void printTeamState(ZeroGravityDevice device) {
+                fuchsia.printGravityState(cave, device);
+                herring.printGravityState(cave, device);
+                znayka.printGravityState(cave, device);
             }
         }
 
@@ -62,14 +62,14 @@ public class Application {
             System.exit(1);
         }
 
-        team.printTeamState();
+        team.printTeamState(gravityDevice);
         try {
             znayka.turnOff(gravityDevice);
         } catch (AlreadyInStateException e) {
             System.out.println("Прибор уже выключен");
         }
 
-        team.printTeamState();
+        team.printTeamState(gravityDevice);
 
         znayka.say("Нам стоило большого труда отколоть эти камешки от огромнейшей глыбы, найденной в глубине пещеры.");
         znayka.giveRock(2, fuchsia, RockMaterial.ANTILUNITE);
@@ -81,6 +81,6 @@ public class Application {
             System.err.println("Прибор уже включен");
         }
 
-        team.printTeamState();
+        team.printTeamState(gravityDevice);
     }
 }
