@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class RockOwnerAbst {
+public abstract class RockOwnerAbst implements RockOwner {
     protected ArrayList<Rock> rocks;
 
     public RockOwnerAbst(ArrayList<Rock> rocks) {
@@ -13,7 +13,8 @@ public abstract class RockOwnerAbst {
         this.rocks = new ArrayList<>();
     }
 
-    protected void addRocks(List<Rock> rocks) {
+    @Override
+    public void addRocks(List<Rock> rocks) {
         this.rocks.addAll(rocks);
     }
 
