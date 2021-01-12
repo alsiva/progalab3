@@ -14,7 +14,7 @@ public class Application {
                 return pickaxe;
             }
         };
-
+        Person pinyin = new PersonWithBareHands("Пилюлькин", 5, 5);
         Person fuchsia = new PersonWithBareHands("Функсия", 10, 10);
         Person herring = new PersonWithBareHands("Селёдочка", 10, 10);
 
@@ -22,19 +22,16 @@ public class Application {
         fuchsia.obtainRocks(cave, 10);
         herring.obtainRocks(cave, 10);
 
-        znayka.giveRock(2, cave, RockMaterial.ANTILUNITE);
-
-
         class Team {
             public ZeroGravityDevice craft() throws NoRockOfMaterialException {
                 Rock biggestLuniteRock = null;
 
-                for (Person person : Arrays.asList(znayka, fuchsia, herring)) {
-                    List<Rock> onlyAntilunites = person.rocks.stream()
-                            .filter(Rock::isAntilunite)
+                for (Person person : Arrays.asList(znayka, fuchsia, herring, pinyin)) {
+                    List<Rock> onlyLunites = person.rocks.stream()
+                            .filter(Rock::isLunite)
                             .collect(Collectors.toList());
 
-                    for (Rock rock : onlyAntilunites) {
+                    for (Rock rock : onlyLunites) {
                         if (biggestLuniteRock == null || rock.size.getSize() > biggestLuniteRock.size.getSize()) {
                             biggestLuniteRock = rock;
                         }
@@ -48,6 +45,7 @@ public class Application {
                 fuchsia.printGravityState(cave, device);
                 herring.printGravityState(cave, device);
                 znayka.printGravityState(cave, device);
+                pinyin.printGravityState(cave, device);
             }
         }
 
@@ -80,6 +78,12 @@ public class Application {
         } catch (AlreadyInStateException e) {
             System.err.println("Прибор уже включен");
         }
+
+
+        znayka.move(5,5);
+        znayka.printGravityState(cave, gravityDevice);
+        znayka.move(0,0);
+
 
         team.printTeamState(gravityDevice);
     }

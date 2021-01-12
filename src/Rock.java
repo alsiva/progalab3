@@ -9,8 +9,8 @@ public class Rock {
         this.size = size;
     }
 
-    public Boolean isAntilunite() {
-        return this.material == RockMaterial.ANTILUNITE;
+    public Boolean isLunite() {
+        return this.material == RockMaterial.LUNITE;
     }
 
     @Override

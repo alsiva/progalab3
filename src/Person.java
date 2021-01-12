@@ -15,7 +15,7 @@ abstract public class Person extends RockOwnerAbst {
 
     public void move(double x, double y) {
         this.position = new Position(x, y);
-        System.out.print(Person.this + "переместился на координаты" + "x = " + x + " y = "+ y);
+        System.out.println(Person.this + " переместился на координаты " + "x = " + x + " y = "+ y+" ");
     }
 
     abstract public Tool getRockMiningTool();
